@@ -1,7 +1,8 @@
 name: fluid_dialog
 description: A dialog that  can switch between multiple contents and animates size and alignment dynamically.
 version: 1.0.0
-homepage:
+repository: https://github.com/RoundedInfinity/fluid_dialog
+
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
