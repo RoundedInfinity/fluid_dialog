@@ -1,39 +1,51 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+![yee](https://res.craft.do/user/preview/917c5358-5da1-1082-14ff-e4d6be9afe52/79d4bf03-09a6-49b2-862e-fc00a2bdc2e4)
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+# Fluid Dialog
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+A dialog that can switch between multiple contents and animates size and alignment dynamically.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+### Video Demo
 
-## Features
+![example_2022-06-07_16-20-48_AdobeExpress.gif](https://res.craft.do/user/full/917c5358-5da1-1082-14ff-e4d6be9afe52/doc/0fff026c-74c7-498a-bd9a-55fbe241dbaa/5f1fcee7-3a1f-465f-8c47-1dd420e043c1)
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+### Features
 
-## Getting started
+- Navigate between different pages
+- Animated size and alignment
+- Fully customizable
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+### Usage
 
-## Usage
+To show a FluidDialog you typically use flutters `showDialog` function. You can also use your own implementation to show the dialog.
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+Here's an example:
 
 ```dart
-const like = 'sample';
+showDialog(
+ context: context,
+ builder: (context) => FluidDialog(
+  // Set the first page of the dialog.
+  rootPage: FluidDialogPage(
+    alignment: Alignment.bottomLeft, //Aligns the dialog to the bottom left.
+    builder: (context) => const TestDialog(), // This can be any widget.
+  ),
+ ),
+);
 ```
 
-## Additional information
+To **navigate** in the dialog, use the `DialogNavigator`. It works similar to the flutter navigator.
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+This only works for widgets in the FluidDialog
+
+```dart
+TextButton(
+  onPressed: () => DialogNavigator.of(context).push(
+    FluidDialogPage(
+      builder: (context) => const SecondDialogPage(),
+    ),
+  ),
+  child: const Text('Go to next page'),
+),
+```
+
+Take a look at the [example](https://github.com/RoundedInfinity/fluid_dialog/blob/main/example/lib/main.dart) or [demo](https://github.com/RoundedInfinity/fluid_dialog/blob/main/example/lib/demo.dart) for more code.

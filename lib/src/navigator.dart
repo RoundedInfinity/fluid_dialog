@@ -39,6 +39,8 @@ class DialogNavigatorProvider extends InheritedWidget {
 /// This can be used to add or remove pages and set the alignment of the dialog.
 ///
 /// [push] and [pop] are can be used for this.
+///
+/// {@macro dialog_navigator_example}
 /// {@endtemplate}
 class DialogNavigator {
   /// The pages stored in the navigation stack.
@@ -46,13 +48,20 @@ class DialogNavigator {
   /// This should not be changed manually. Use [push] and [pop] instead.
   final ValueNotifier<List<FluidDialogPage>> pages;
 
+  final BuildContext context;
+
   /// {@macro dialog_navigator_docs}
-  DialogNavigator({required this.pages});
+  DialogNavigator({
+    required this.pages,
+    required this.context,
+  });
 
   /// Gets the next [DialogNavigator] from the context.
   ///
   /// This should only be used in a [FluidDialogPage] or
   /// when a [DialogNavigatorProvider] is manually added to the widget tree.
+  ///
+  /// For info how to use this, see [DialogNavigator].
   static DialogNavigator of(BuildContext context) {
     return DialogNavigatorProvider.of(context).navigator;
   }
@@ -60,6 +69,17 @@ class DialogNavigator {
   /// Pushes a new [FluidDialogPage] onto the navigation stack.
   ///
   /// Size and alignment will be changed automatically.
+  ///
+  /// {@template dialog_navigator_example}
+  /// **Example:**
+  /// ```dart
+  /// DialogNavigator.of(context).push(
+  ///   FluidDialogPage(
+  ///     builder: (context) => Text('Gday'),
+  ///  ),
+  /// );
+  /// ```
+  /// {@endtemplate}
   void push(FluidDialogPage page) {
     pages.value = pages.value.toList()..add(page);
   }
@@ -74,7 +94,7 @@ class DialogNavigator {
   /// Closes the entire dialog.
   ///
   /// Same as using `Navigator.of(context).pop();`
-  void close(BuildContext context) {
+  void close() {
     Navigator.of(context).pop();
   }
 

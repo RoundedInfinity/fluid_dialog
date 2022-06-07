@@ -117,8 +117,8 @@ class InfoDialog extends StatelessWidget {
               ),
             ),
             const Divider(),
-            const Text('Words: 220'),
-            const Text('Reading Time: 1min 20s'),
+            const Text('Words: 420'),
+            const Text('Reading Time: 6min 9s'),
           ],
         ),
       ),
@@ -203,7 +203,7 @@ class AboutPage extends StatelessWidget {
                 ),
                 IconButton(
                   // Close the dialog completely.
-                  onPressed: () => DialogNavigator.of(context).close(context),
+                  onPressed: () => DialogNavigator.of(context).close(),
                   icon: const Icon(Icons.close),
                   color: Theme.of(context).colorScheme.onSurface,
                 ),

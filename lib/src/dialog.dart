@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'navigator.dart';
 
 /// {@template fluid_dialog_docs}
-/// A dialog that can switch size and alignment dynamically.
+/// A dialog that  can switch between multiple contents and animates size and alignment dynamically.
 ///
 /// You can controll the dialog with the [DialogNavigator].
 /// To use it, get it from the context: `DialogNavigator.of(context)`.
@@ -12,6 +12,22 @@ import 'navigator.dart';
 /// To change pages and alignment use the [DialogNavigator].
 ///
 /// The size of the dialog is determened by its child elements.
+///
+/// **Example:**
+/// ```dart
+/// //Shows a simple dialog.
+/// showDialog(
+///  context: context,
+///  builder: (context) => FluidDialog(
+///   // Set the first page of the dialog.
+///   rootPage: FluidDialogPage(
+///     alignment: Alignment.bottomLeft, //Aligns the dialog to the bottom left.
+///     builder: (context) => const TestDialog(), // This can be any widget.
+///   ),
+///  ),
+/// );
+///
+/// ```
 ///
 /// See also:
 /// - [DialogNavigator] for more information about navigating a dialog.
@@ -90,6 +106,7 @@ class FluidDialog extends StatelessWidget {
       padding: edgePadding,
       child: DialogNavigatorProvider(
         navigator: DialogNavigator(
+          context: context,
           pages: ValueNotifier([rootPage]),
         ),
         // Builder used to get new context for DialogNavigatorProvider.

@@ -1,6 +1,6 @@
 name: fluid_dialog
-description: A new Flutter package project.
-version: 0.0.1
+description: A dialog that  can switch between multiple contents and animates size and alignment dynamically.
+version: 1.0.0
 homepage:
 
 environment:
