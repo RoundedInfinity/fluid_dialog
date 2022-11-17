@@ -2,19 +2,22 @@
 
 # Fluid Dialog
 
+[![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
+[![License: MIT][license_badge]][license_link]
+
 A dialog that can switch between multiple contents and animates size and alignment dynamically.
 
 ### Video Demo
 
 ![video demo](https://github.com/RoundedInfinity/fluid_dialog/blob/main/images/video.gif?raw=true)
 
-### Features
+### Features 🎉
 
 - Navigate between different pages
 - Animated size and alignment
 - Fully customizable
 
-### Usage
+### Usage 🧪
 
 To show a FluidDialog you typically use flutter's `showDialog` function. You can also use your implementation to show the dialog.
 
@@ -33,7 +36,7 @@ showDialog(
 );
 ```
 
-To **navigate** in the dialog, use the `DialogNavigator`. It works similar to the flutter navigator.
+To **navigate** in the dialog, use the `DialogNavigator`. It works similarly to the flutter navigator.
 
 This only works for widgets in the FluidDialog
 
@@ -49,3 +52,8 @@ TextButton(
 ```
 
 Take a look at the [example](https://github.com/RoundedInfinity/fluid_dialog/blob/main/example/lib/main.dart) or [demo](https://github.com/RoundedInfinity/fluid_dialog/blob/main/example/lib/demo.dart) for more code.
+
+[license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
+[license_link]: https://opensource.org/licenses/MIT
+[very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
+[very_good_analysis_link]: https://pub.dev/packages/very_good_analysis

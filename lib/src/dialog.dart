@@ -1,8 +1,9 @@
+import 'package:fluid_dialog/src/navigator.dart';
 import 'package:flutter/material.dart';
-import 'navigator.dart';
 
 /// {@template fluid_dialog_docs}
-/// A dialog that  can switch between multiple contents and animates size and alignment dynamically.
+/// A dialog that  can switch between multiple contents
+/// and animates size and alignment dynamically.
 ///
 /// You can controll the dialog with the [DialogNavigator].
 /// To use it, get it from the context: `DialogNavigator.of(context)`.
@@ -34,14 +35,33 @@ import 'navigator.dart';
 /// - [FluidDialogPage] for creating pages for a dialog.
 /// {@endtemplate}
 class FluidDialog extends StatelessWidget {
-  /// The initial page that is shown by the dialog. This page is shown when the dialog is first created.
+  /// {@macro fluid_dialog_docs}
+  const FluidDialog({
+    super.key,
+    required this.rootPage,
+    this.edgePadding = const EdgeInsets.all(12),
+    this.alignmentDuration = const Duration(milliseconds: 500),
+    this.alignmentCurve = const Cubic(0.2, 0, 0, 1),
+    this.sizeDuration = const Duration(milliseconds: 300),
+    this.sizeCurve = const Cubic(0.2, 0, 0, 1),
+    this.transitionBuilder,
+    this.transitionDuration = const Duration(milliseconds: 600),
+    this.reverseTransitionDuration = const Duration(milliseconds: 100),
+    this.transitionCurve = Curves.easeInOutCubicEmphasized,
+    this.reverseTransitionCurve = Curves.easeInOutCubicEmphasized,
+    this.defaultDecoration,
+  });
+
+  /// The initial page that is shown by the dialog.
+  /// This page is shown when the dialog is first created.
   ///
   /// See also:
   /// - [DialogNavigator] for opening pages within a dialog.
   /// - [FluidDialogPage] for creating pages for a dialog.
   final FluidDialogPage rootPage;
 
-  /// The minimum padding on the edges of the screen. Limits the size of the dialog.
+  /// The minimum padding on the edges of the screen.
+  /// Limits the size of the dialog.
   ///
   /// When this is 0, the dialog can take up the entire screen.
   final EdgeInsetsGeometry edgePadding;
@@ -78,27 +98,10 @@ class FluidDialog extends StatelessWidget {
   /// This uses a [ZoomPageTransitionsBuilder] by default.
   final AnimatedSwitcherTransitionBuilder? transitionBuilder;
 
-  /// The style of the dialog.
+  /// The default style of the dialog.
   ///
   /// Typically a [BoxDecoration].
-  final Decoration? dialogDecoration;
-
-  /// {@macro fluid_dialog_docs}
-  const FluidDialog({
-    Key? key,
-    required this.rootPage,
-    this.edgePadding = const EdgeInsets.all(12.0),
-    this.alignmentDuration = const Duration(milliseconds: 500),
-    this.alignmentCurve = standardEasing,
-    this.sizeDuration = const Duration(milliseconds: 300),
-    this.sizeCurve = standardEasing,
-    this.transitionBuilder,
-    this.transitionDuration = const Duration(milliseconds: 600),
-    this.reverseTransitionDuration = const Duration(milliseconds: 50),
-    this.transitionCurve = Curves.linear,
-    this.reverseTransitionCurve = standardEasing,
-    this.dialogDecoration,
-  }) : super(key: key);
+  final Decoration? defaultDecoration;
 
   @override
   Widget build(BuildContext context) {
@@ -124,12 +127,14 @@ class FluidDialog extends StatelessWidget {
                   child: Material(
                     borderOnForeground: false,
                     color: Colors.transparent,
-                    elevation: 0,
-                    child: Container(
-                      decoration: dialogDecoration ??
+                    child: AnimatedContainer(
+                      duration: transitionDuration,
+                      curve: transitionCurve,
+                      decoration: page.decoration ??
+                          defaultDecoration ??
                           BoxDecoration(
                             color: Theme.of(context).colorScheme.surface,
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.circular(16),
                           ),
                       child: AnimatedSize(
                         duration: sizeDuration,
@@ -143,9 +148,10 @@ class FluidDialog extends StatelessWidget {
                           transitionBuilder: transitionBuilder ??
                               (child, animation) {
                                 // Use default animation
-                                return const ZoomPageTransitionsBuilder()
-                                    .buildTransitions(null, context, animation,
-                                        ReverseAnimation(animation), child);
+                                return FadeTransition(
+                                  opacity: animation,
+                                  child: child,
+                                );
                               },
 
                           // Use the current page from the DialogNavigator

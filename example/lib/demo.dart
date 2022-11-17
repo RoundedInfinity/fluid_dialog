@@ -1,7 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:fluid_dialog/fluid_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:sprung/sprung.dart';
 
 const String placeholder = '''
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Scripta periculis ei eam, te pro movet reformidans. Eos verear percipit ex, eos ne eligendi inimicus. Pri posse graeco definitiones cu, id eam populo quaestio adipiscing, usu quod malorum te. Offendit eleifend moderatius ex vix, quem odio mazim et qui, purto expetendis cotidieque quo cu, veri persius vituperata ei nec. Pri viderer tamquam ei. Partiendo adversarium no mea. Offendit eleifend moderatius ex vix, quem odio mazim et qui, purto expetendis cotidieque quo cu, veri persius vituperata ei nec. No vis iuvaret appareat. Scripta periculis ei eam, te pro movet reformidans. Scripta periculis ei eam, te pro movet reformidans. Offendit eleifend moderatius ex vix, quem odio mazim et qui, purto expetendis cotidieque quo cu, veri persius vituperata ei nec. Ad doctus gubergren duo, mel te postea suavitate. Liber nusquam insolens has ei, appetere accusamus intellegam id ius.
@@ -23,23 +22,20 @@ class DemoPage extends StatelessWidget {
               showModal(
                 context: context,
                 builder: (context) => FluidDialog(
-                  // A curve from the sprung package is used to give the transition a bouncy effect.
-                  alignmentCurve: Sprung.criticallyDamped,
+                  // Use a custom curve for the alignment transition
+                  alignmentCurve: Curves.easeInOutCubicEmphasized,
                   // Setting custom durations for all animations.
                   sizeDuration: const Duration(milliseconds: 300),
-                  alignmentDuration: const Duration(milliseconds: 800),
-                  transitionDuration: const Duration(milliseconds: 200),
-                  reverseTransitionDuration: const Duration(milliseconds: 100),
+                  alignmentDuration: const Duration(milliseconds: 600),
+                  transitionDuration: const Duration(milliseconds: 300),
+                  reverseTransitionDuration: const Duration(milliseconds: 50),
                   // Here we use another animation from the animations package instead of the default one.
-                  transitionBuilder: (child, animation) => SharedAxisTransition(
-                    transitionType: SharedAxisTransitionType.scaled,
+                  transitionBuilder: (child, animation) => FadeScaleTransition(
                     animation: animation,
-                    secondaryAnimation: ReverseAnimation(animation),
-                    fillColor: Colors.transparent,
                     child: child,
                   ),
                   // Configuring how the dialog looks.
-                  dialogDecoration: BoxDecoration(
+                  defaultDecoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -112,6 +108,11 @@ class InfoDialog extends StatelessWidget {
                 FluidDialogPage(
                   // This dialog is shown in the center of the screen.
                   alignment: Alignment.center,
+                  // Using a custom decoration for this dialog.
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(32),
+                    color: Colors.white,
+                  ),
                   builder: (context) => const AboutPage(),
                 ),
               ),

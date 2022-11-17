@@ -3,26 +3,29 @@ import 'package:flutter/widgets.dart';
 /// {@template dialog_navigator_provider_docs}
 /// This widget provides a [DialogNavigator] to its children.
 ///
-///  This allows you to call the [DialogNavigator] with `DialogNavigator.of(context)`.
+/// This allows you to call the [DialogNavigator]
+/// with `DialogNavigator.of(context)`.
 ///
 /// See also:
 /// - [DialogNavigator] for more information about navigating a dialog.
 /// - [FluidDialogPage] for creating pages for a dialog.
-/// - [FluidDialog] for creating a dialog.
+/// - `FluidDialog` for creating a dialog.
 /// {@endtemplate}
 class DialogNavigatorProvider extends InheritedWidget {
+  /// {@macro dialog_navigator_provider_docs}
+  const DialogNavigatorProvider({
+    super.key,
+    required this.navigator,
+    required super.child,
+  });
+
   /// The [DialogNavigator] provided by this widget.
   final DialogNavigator navigator;
 
-  /// {@macro dialog_navigator_provider_docs}
-  const DialogNavigatorProvider({
-    Key? key,
-    required this.navigator,
-    required Widget child,
-  }) : super(key: key, child: child);
-
+  /// The state from the closest instance of this
+  /// class that encloses the given context.
   static DialogNavigatorProvider of(BuildContext context) {
-    final DialogNavigatorProvider? result =
+    final result =
         context.dependOnInheritedWidgetOfExactType<DialogNavigatorProvider>();
     assert(result != null, 'No DialogNavigatorProvider found in context');
     return result!;
@@ -34,7 +37,7 @@ class DialogNavigatorProvider extends InheritedWidget {
 }
 
 /// {@template dialog_navigator_docs}
-/// This class is used to navigate a [FluidDialog]
+/// This class is used to navigate a `FluidDialog`
 ///
 /// This can be used to add or remove pages and set the alignment of the dialog.
 ///
@@ -43,18 +46,19 @@ class DialogNavigatorProvider extends InheritedWidget {
 /// {@macro dialog_navigator_example}
 /// {@endtemplate}
 class DialogNavigator {
-  /// The pages stored in the navigation stack.
-  ///
-  /// This should not be changed manually. Use [push] and [pop] instead.
-  final ValueNotifier<List<FluidDialogPage>> pages;
-
-  final BuildContext context;
-
   /// {@macro dialog_navigator_docs}
   DialogNavigator({
     required this.pages,
     required this.context,
   });
+
+  /// The pages stored in the navigation stack.
+  ///
+  /// This should not be changed manually. Use [push] and [pop] instead.
+  final ValueNotifier<List<FluidDialogPage>> pages;
+
+  /// `BuildContext` used for navigation.
+  final BuildContext context;
 
   /// Gets the next [DialogNavigator] from the context.
   ///
@@ -104,20 +108,35 @@ class DialogNavigator {
       return Builder(
         builder: (context) => pages.value.last.builder(context),
       );
+      // ignore: avoid_catching_errors
     } on StateError {
       throw Exception(
+        // ignore: lines_longer_than_80_chars
         'No widget found in pages. Make sure that there is at least one element in the pages list.',
       );
     }
   }
 }
 
-/// A page for the [FluidDialog].
-/// This contains the widget shown in the dialog and the alignment of the dialog.
+/// {@template fluid_dialog_page}
+/// A page for the `FluidDialog`.
+///
+/// This contains the widget shown in the dialog
+/// and the alignment of the dialog.
+/// {@endtemplate}
 class FluidDialogPage {
+  /// {@macro fluid_dialog_page}
+  FluidDialogPage({
+    required this.builder,
+    this.decoration,
+    this.alignment = Alignment.center,
+  });
+
   /// A builder for the widget shown in the dialog.
   ///
-  /// The [context] contains a [DialogNavigator], which you can access with `DialogNavigator.of(context)`.
+  /// The `context` contains a [DialogNavigator],
+  /// which you can access with `DialogNavigator.of(context)`.
+  ///
   /// This can be used to push new pages to the dialog.
   final Widget Function(BuildContext context) builder;
 
@@ -126,10 +145,8 @@ class FluidDialogPage {
   /// This is `Alignment.center` by default.
   final Alignment alignment;
 
-  /// A page for the [FluidDialog].
-  /// This contains the widget shown in the dialog and the alignment of the dialog.
-  FluidDialogPage({
-    required this.builder,
-    this.alignment = Alignment.center,
-  });
+  /// The [Decoration] used for this page.
+  ///
+  /// Typically a [BoxDecoration].
+  final Decoration? decoration;
 }
