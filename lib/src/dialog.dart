@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 /// A dialog that  can switch between multiple contents
 /// and animates size and alignment dynamically.
 ///
-/// You can controll the dialog with the [DialogNavigator].
+/// You can control the dialog with the [DialogNavigator].
 /// To use it, get it from the context: `DialogNavigator.of(context)`.
 ///
 /// The content of the dialog is stored in [FluidDialogPage]s.
 /// The [rootPage] is the first page in the navigation stack.
 /// To change pages and alignment use the [DialogNavigator].
 ///
-/// The size of the dialog is determened by its child elements.
+/// The size of the dialog is determined by its child elements.
 ///
 /// **Example:**
 /// ```dart
@@ -37,8 +37,8 @@ import 'package:flutter/material.dart';
 class FluidDialog extends StatelessWidget {
   /// {@macro fluid_dialog_docs}
   const FluidDialog({
-    super.key,
     required this.rootPage,
+    super.key,
     this.edgePadding = const EdgeInsets.all(12),
     this.alignmentDuration = const Duration(milliseconds: 500),
     this.alignmentCurve = const Cubic(0.2, 0, 0, 1),

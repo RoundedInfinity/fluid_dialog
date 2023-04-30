@@ -87,23 +87,25 @@ class SecondDialogPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            'And a bigger dialog',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-          const Text(placeholder),
-          TextButton(
-            onPressed: () => DialogNavigator.of(context).pop(),
-            child: const Text('Go back'),
-          ),
-          TextButton(
-            onPressed: () => DialogNavigator.of(context).close(),
-            child: const Text('Close the dialog'),
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'And a bigger dialog',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const Text(placeholder),
+            TextButton(
+              onPressed: () => DialogNavigator.of(context).pop(),
+              child: const Text('Go back'),
+            ),
+            TextButton(
+              onPressed: () => DialogNavigator.of(context).close(),
+              child: const Text('Close the dialog'),
+            ),
+          ],
+        ),
       ),
     );
   }

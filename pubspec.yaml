@@ -1,6 +1,6 @@
 name: fluid_dialog
 description: A dialog that  can switch between multiple contents and animates size and alignment dynamically.
-version: 1.1.0
+version: 1.1.1
 repository: https://github.com/RoundedInfinity/fluid_dialog
 
 environment:
@@ -14,7 +14,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  very_good_analysis: ^3.1.0
+  very_good_analysis: ^4.0.0+1
 
 screenshots:
   - description: "A cover image of the plugin"

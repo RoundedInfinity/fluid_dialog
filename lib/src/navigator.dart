@@ -14,9 +14,9 @@ import 'package:flutter/widgets.dart';
 class DialogNavigatorProvider extends InheritedWidget {
   /// {@macro dialog_navigator_provider_docs}
   const DialogNavigatorProvider({
-    super.key,
     required this.navigator,
     required super.child,
+    super.key,
   });
 
   /// The [DialogNavigator] provided by this widget.
@@ -47,7 +47,7 @@ class DialogNavigatorProvider extends InheritedWidget {
 /// {@endtemplate}
 class DialogNavigator {
   /// {@macro dialog_navigator_docs}
-  DialogNavigator({
+  const DialogNavigator({
     required this.pages,
     required this.context,
   });
@@ -126,7 +126,7 @@ class DialogNavigator {
 /// {@endtemplate}
 class FluidDialogPage {
   /// {@macro fluid_dialog_page}
-  FluidDialogPage({
+  const FluidDialogPage({
     required this.builder,
     this.decoration,
     this.alignment = Alignment.center,
