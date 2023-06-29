@@ -19,7 +19,7 @@ A dialog that can switch between multiple contents and animates size and alignm
 
 ### Usage 🧪
 
-To show a FluidDialog you typically use flutter's `showDialog` function. You can also use your implementation to show the dialog.
+To show a FluidDialog you typically use Flutter's `showDialog` function. You can also use your implementation to show the dialog.
 
 Here's an example:
 

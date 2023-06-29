@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0 - 2023-06-29
+
+* **Chore**: Updated flutter version and dependencies.
+
 ## 1.1.1
 
 * **Docs**: Improved docs and readme.
